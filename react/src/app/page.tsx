@@ -41,7 +41,7 @@ export default function Home() {
         <p>
           Hyvor Talk is a privacy-focused comment system that can be easily
           integrated into React applications. This example demonstrates how to
-          set up Hyvor Talk in a React application using the App Router.
+          set up Hyvor Talk in a React applications.
         </p>
       </main>
     </div>
