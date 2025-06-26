@@ -1,31 +1,22 @@
 "use client";
-import { useEffect } from "react";
-import React from "react";
+
+import React, { useEffect } from "react";
 import Image from "next/image";
 import styles from "./page.module.css";
-import { CommentCount } from "@hyvor/hyvor-talk-react";
+import { Comments, CommentCount } from "@hyvor/hyvor-talk-react";
 import { CommentCounts } from "@hyvor/hyvor-talk-base";
-import { Comments } from "@hyvor/hyvor-talk-react";
 
-const YOUR_WEBSITE_ID = 10787; // Replace with your actual Hyvor Talk website ID
-const UNIQUE_PAGE_ID = ""; // Replace with a unique identifier for the page
+const YOUR_WEBSITE_ID = 10787;
+const UNIQUE_PAGE_ID = ""; // Use route or a unique identifier (string)
 
-const App = () => {
+export default function Home() {
+  // Run once on mount to load comment counts
   useEffect(() => {
     CommentCounts.load({
       "website-id": YOUR_WEBSITE_ID,
     });
   }, []);
 
-  return (
-    <div>
-      <Comments website-id={YOUR_WEBSITE_ID} page-id={UNIQUE_PAGE_ID} />
-      <CommentCount page-id={""} />
-    </div>
-  );
-};
-
-export default function Home() {
   return (
     <div className={styles.page}>
       <h2>Hyvor Talk + React Integration</h2>
@@ -38,7 +29,14 @@ export default function Home() {
           height={300}
           priority
         />
-        <App />
+
+        {/* Hyvor Talk Comments */}
+        <Comments website-id={YOUR_WEBSITE_ID} page-id={UNIQUE_PAGE_ID} />
+
+        {/* Comment Count */}
+        <p>
+          Total comments: <CommentCount page-id={UNIQUE_PAGE_ID} />
+        </p>
 
         <p>
           Hyvor Talk is a privacy-focused comment system that can be easily
